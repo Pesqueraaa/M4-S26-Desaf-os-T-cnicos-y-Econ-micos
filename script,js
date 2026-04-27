@@ -1,16 +1,83 @@
-function ejecutar() {
-  let consultas = 12000 * 2;
-  let tokensEntrada = consultas * 2500;
-  let tokensSalida = consultas * 600;
+function getNum(id) {
+  const v = Number(document.getElementById(id).value);
+  return isNaN(v) ? null : v;
+}
 
-  let ahorroMin = (12 - 8) * 12000;
-  let horas = ahorroMin / 60;
-  let ahorro = horas * 22;
+function validar(inputs) {
+  const errores = [];
+  for (const [k, v] of Object.entries(inputs)) {
+    if (v === null) errores.push(`Valor no numérico en ${k}`);
+    if (v < 0) errores.push(`Valor negativo en ${k}`);
+  }
+  return errores;
+}
 
-  document.getElementById("resultados").innerHTML =
-    `Consultas: ${consultas} <br>
-     Tokens entrada: ${tokensEntrada} <br>
-     Tokens salida: ${tokensSalida} <br>
-     Horas ahorradas: ${horas} <br>
-     Ahorro: €${ahorro}`;
+function calcular() {
+  const datos = {
+    tickets: getNum("tickets"),
+    consultas: getNum("consultas"),
+    tokensEntrada: getNum("tokensEntrada"),
+    tokensSalida: getNum("tokensSalida"),
+    tiempoActual: getNum("tiempoActual"),
+    tiempoIA: getNum("tiempoIA"),
+    coste: getNum("coste")
+  };
+
+  const errs = validar(datos);
+  const boxErr = document.getElementById("errores");
+  if (errs.length) {
+    boxErr.textContent = errs.join(" · ");
+    return;
+  } else {
+    boxErr.textContent = "";
+  }
+
+  const consultasMensuales = datos.tickets * datos.consultas;
+  const tokensIn = consultasMensuales * datos.tokensEntrada;
+  const tokensOut = consultasMensuales * datos.tokensSalida;
+  const ahorroMin = (datos.tiempoActual - datos.tiempoIA) * datos.tickets;
+  const horas = ahorroMin / 60;
+  const ahorro = horas * datos.coste;
+
+  document.getElementById("rConsultas").textContent = consultasMensuales.toLocaleString();
+  document.getElementById("rTokensIn").textContent = tokensIn.toLocaleString();
+  document.getElementById("rTokensOut").textContent = tokensOut.toLocaleString();
+  document.getElementById("rHoras").textContent = horas.toFixed(2);
+  document.getElementById("rAhorro").textContent = ahorro.toFixed(2);
+
+  generarResumen({
+    consultasMensuales, tokensIn, tokensOut, horas, ahorro
+  });
+}
+
+function generarResumen(r) {
+  const decision = document.getElementById("decisionTexto").value.trim();
+  const texto = `
+Resultados:
+- Consultas mensuales: ${r.consultasMensuales.toLocaleString()}
+- Tokens entrada: ${r.tokensIn.toLocaleString()}
+- Tokens salida: ${r.tokensOut.toLocaleString()}
+- Horas ahorradas: ${r.horas.toFixed(2)}
+- Ahorro bruto: €${r.ahorro.toFixed(2)}
+
+Comparación:
+Cloud destaca en protección de datos, trazabilidad y control técnico.
+API externa destaca en rapidez de implantación y menor coste inicial.
+
+Decisión:
+${decision}
+
+Métrica de éxito:
+Reducir el tiempo medio de resolución por ticket ≥ 30% sin pérdida de calidad.
+`.trim();
+
+  document.getElementById("resumenTexto").value = texto;
+}
+
+function copiarResumen() {
+  const ta = document.getElementById("resumenTexto");
+  ta.select();
+  ta.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  alert("Resumen copiado");
 }
