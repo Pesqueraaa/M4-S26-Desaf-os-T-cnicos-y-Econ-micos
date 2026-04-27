@@ -1,0 +1,41 @@
+function calcularConsultasMensuales(tickets, consultas) {
+  return tickets * consultas;
+}
+
+function calcularTokensEntrada(consultasMensuales, tokensEntrada) {
+  return consultasMensuales * tokensEntrada;
+}
+
+function calcularTokensSalida(consultasMensuales, tokensSalida) {
+  return consultasMensuales * tokensSalida;
+}
+
+function calcularAhorroBruto(tickets, tiempoActual, tiempoIA, coste) {
+  let ahorroMin = (tiempoActual - tiempoIA) * tickets;
+  let horas = ahorroMin / 60;
+  let ahorro = horas * coste;
+  return { horas, ahorro };
+}
+
+function ejecutar() {
+  let t = 12000;
+  let c = 2;
+  let te = 2500;
+  let ts = 600;
+  let ta = 12;
+  let ti = 8;
+  let coste = 22;
+
+  let consultas = calcularConsultasMensuales(t, c);
+  let tokensIn = calcularTokensEntrada(consultas, te);
+  let tokensOut = calcularTokensSalida(consultas, ts);
+  let ahorro = calcularAhorroBruto(t, ta, ti, coste);
+
+  document.getElementById("resultados").innerHTML = `
+    Consultas: ${consultas} <br>
+    Tokens entrada: ${tokensIn} <br>
+    Tokens salida: ${tokensOut} <br>
+    Horas ahorradas: ${ahorro.horas} <br>
+    Ahorro bruto: €${ahorro.ahorro}
+  `;
+}
