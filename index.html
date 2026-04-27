@@ -2,57 +2,194 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>Integración IA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>M4-S26 · Integración IA</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
-  <h1>Análisis integración IA</h1>
+  <h1>Diagnóstico técnico-económico de integración IA</h1>
+  <p>Introduce los datos, calcula resultados y completa el análisis.</p>
 </header>
 
 <main>
 
-<section>
-  <h2>Datos del caso</h2>
-  <button onclick="ejecutar()">Calcular resultados</button>
+<section id="datos">
+  <h2>1. Datos de entrada</h2>
+
+  <div class="grid">
+    <label>Tickets mensuales
+      <input id="tickets" type="number" value="12000" min="0">
+    </label>
+
+    <label>Consultas IA por ticket
+      <input id="consultas" type="number" value="2" min="0">
+    </label>
+
+    <label>Tokens entrada por consulta
+      <input id="tokensEntrada" type="number" value="2500" min="0">
+    </label>
+
+    <label>Tokens salida por consulta
+      <input id="tokensSalida" type="number" value="600" min="0">
+    </label>
+
+    <label>Tiempo actual por ticket (min)
+      <input id="tiempoActual" type="number" value="12" min="0">
+    </label>
+
+    <label>Tiempo con IA (min)
+      <input id="tiempoIA" type="number" value="8" min="0">
+    </label>
+
+    <label>Coste hora (€)
+      <input id="coste" type="number" value="22" min="0">
+    </label>
+  </div>
+
+  <div class="actions">
+    <button onclick="calcular()">Calcular</button>
+    <button class="secondary" onclick="copiarResumen()">Copiar resumen</button>
+  </div>
+
+  <p id="errores" class="error"></p>
 </section>
 
-<section>
-  <h2>Resultados</h2>
-  <p id="resultados"></p>
+<section id="resultados">
+  <h2>2. Resultados calculados</h2>
+  <div class="cards">
+    <div class="card"><b>Consultas mensuales</b><span id="rConsultas">—</span></div>
+    <div class="card"><b>Tokens entrada</b><span id="rTokensIn">—</span></div>
+    <div class="card"><b>Tokens salida</b><span id="rTokensOut">—</span></div>
+    <div class="card"><b>Horas ahorradas</b><span id="rHoras">—</span></div>
+    <div class="card"><b>Ahorro bruto (€)</b><span id="rAhorro">—</span></div>
+  </div>
 </section>
 
-<section>
-  <h2>Matriz comparativa</h2>
+<section id="matriz">
+  <h2>3. Matriz comparativa (editable)</h2>
   <table>
-    <tr><th>Criterio</th><th>API</th><th>Cloud</th></tr>
-    <tr><td>Coste inicial</td><td>Bajo</td><td>Medio</td></tr>
-    <tr><td>Escalabilidad</td><td>Variable</td><td>Alta</td></tr>
-    <tr><td>Protección datos</td><td>Baja</td><td>Alta</td></tr>
-    <tr><td>Trazabilidad</td><td>Media</td><td>Alta</td></tr>
+    <thead>
+      <tr>
+        <th>Criterio</th>
+        <th>API externa</th>
+        <th>Cloud gestionado</th>
+        <th>Opción mejor</th>
+        <th>Motivo breve</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Coste inicial</td>
+        <td><input value="Bajo"></td>
+        <td><input value="Medio"></td>
+        <td><input value="API"></td>
+        <td><input value="Menor inversión inicial"></td>
+      </tr>
+      <tr>
+        <td>Coste al escalar</td>
+        <td><input value="Alto"></td>
+        <td><input value="Medio"></td>
+        <td><input value="Cloud"></td>
+        <td><input value="Mejor control del crecimiento"></td>
+      </tr>
+      <tr>
+        <td>Protección de datos</td>
+        <td><input value="Baja"></td>
+        <td><input value="Alta"></td>
+        <td><input value="Cloud"></td>
+        <td><input value="Datos sensibles"></td>
+      </tr>
+      <tr>
+        <td>Trazabilidad</td>
+        <td><input value="Baja"></td>
+        <td><input value="Alta"></td>
+        <td><input value="Cloud"></td>
+        <td><input value="Logs y control"></td>
+      </tr>
+      <tr>
+        <td>Latencia</td>
+        <td><input value="Media"></td>
+        <td><input value="Baja"></td>
+        <td><input value="Cloud"></td>
+        <td><input value="Infraestructura integrada"></td>
+      </tr>
+      <tr>
+        <td>Dependencia proveedor</td>
+        <td><input value="Alta"></td>
+        <td><input value="Media"></td>
+        <td><input value="Cloud"></td>
+        <td><input value="Menor vendor lock-in"></td>
+      </tr>
+      <tr>
+        <td>Control técnico</td>
+        <td><input value="Bajo"></td>
+        <td><input value="Alto"></td>
+        <td><input value="Cloud"></td>
+        <td><input value="Mayor personalización"></td>
+      </tr>
+    </tbody>
   </table>
 </section>
 
-<section>
-  <h2>Mini RAID</h2>
-  <ul>
-    <li>Riesgo: fuga de datos → anonimización</li>
-    <li>Supuesto: reducción de tiempo → medición</li>
-    <li>Incidencia: proceso lento → automatización</li>
-    <li>Dependencia: proveedor → SLA</li>
-  </ul>
+<section id="raid">
+  <h2>4. Mini-RAID (editable)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Tipo</th>
+        <th>Elemento</th>
+        <th>Impacto</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Riesgo</td>
+        <td><input value="Exposición de datos personales"></td>
+        <td><input value="Alto"></td>
+        <td><input value="Anonimización y control de accesos"></td>
+      </tr>
+      <tr>
+        <td>Supuesto</td>
+        <td><input value="La IA reducirá tiempos"></td>
+        <td><input value="Medio"></td>
+        <td><input value="Medir KPIs de tiempo"></td>
+      </tr>
+      <tr>
+        <td>Incidencia</td>
+        <td><input value="Proceso manual lento"></td>
+        <td><input value="Alto"></td>
+        <td><input value="Automatización parcial"></td>
+      </tr>
+      <tr>
+        <td>Dependencia</td>
+        <td><input value="Proveedor de IA"></td>
+        <td><input value="Alto"></td>
+        <td><input value="SLA y alternativas"></td>
+      </tr>
+    </tbody>
+  </table>
 </section>
 
-<section>
-  <h2>Decisión final</h2>
-  <p>
-    Se recomienda cloud gestionado por mejor control de datos y trazabilidad,
-    aunque tenga mayor coste inicial.
-  </p>
+<section id="decision">
+  <h2>5. Decisión final</h2>
+  <textarea id="decisionTexto" rows="5">
+Se recomienda la plataforma cloud gestionada por mayor control de datos y trazabilidad, aunque implique mayor coste inicial.
+  </textarea>
+</section>
+
+<section id="resumen">
+  <h2>6. Resumen (copiable)</h2>
+  <textarea id="resumenTexto" rows="8" readonly></textarea>
 </section>
 
 </main>
+
+<footer>
+  <p>Proyecto académico · No usar datos personales reales.</p>
+</footer>
 
 <script src="script.js"></script>
 </body>
