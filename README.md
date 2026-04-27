@@ -1,11 +1,16 @@
-# M4-S26-Desaf-os-T-cnicos-y-Econ-micos
+# Aplicación integración IA
 
 ## Objetivo
-Completar una aplicación web estática para analizar un caso de integración de IA generativa en atención al cliente.
+Analizar la integración de IA en atención al cliente.
 
-## Funcionalidades previstas
-- Introducción de datos del caso.
-- Cálculo de consultas, tokens y ahorro humano bruto.
-- Matriz comparativa entre API externa y cloud gestionado.
-- Mini-RAID.
-- Decisión final.
+## Funcionalidades
+- Cálculos básicos
+- Matriz comparativa
+- Mini RAID
+- Decisión final
+
+## Uso
+Pulsa el botón para generar resultados.
+
+## Advertencia
+No usar datos personales reales.
