@@ -1,22 +1,53 @@
-body {
-  font-family: Arial;
-  margin: 20px;
-  background: #f4f4f4;
-}
+:root { font-family: system-ui, sans-serif; }
+body { margin: 0; background: #f5f5f5; }
+header, main, footer { max-width: 960px; margin: auto; padding: 1rem; }
 
 section {
   background: white;
-  padding: 15px;
-  margin: 10px 0;
+  padding: 1rem;
+  margin: 1rem 0;
   border-radius: 8px;
+  border: 1px solid #ddd;
 }
 
-table {
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+input, textarea {
   width: 100%;
-  border-collapse: collapse;
+  padding: 6px;
+  margin-top: 4px;
 }
 
-td, th {
-  border: 1px solid #ccc;
-  padding: 8px;
+.actions { margin-top: 10px; }
+button {
+  padding: 10px;
+  margin-right: 8px;
+  background: #2e7d32;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
+button.secondary { background: #555; }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+.card {
+  background: #fafafa;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #eee;
+}
+.card b { display: block; margin-bottom: 6px; }
+
+table { width: 100%; border-collapse: collapse; }
+th, td { border: 1px solid #ccc; padding: 6px; }
+
+.error { color: red; }
+footer { text-align: center; font-size: 0.9em; }
